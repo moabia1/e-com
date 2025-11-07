@@ -96,8 +96,6 @@ export default function CheckoutPage() {
       <ReceiptModal
         receipt={receipt}
         onClose={() => setReceipt(null)}
-        name={name}
-        email={email}
       />
     </div>
   );
