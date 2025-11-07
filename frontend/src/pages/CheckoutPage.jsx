@@ -93,7 +93,12 @@ export default function CheckoutPage() {
         {err && <div className="text-red-600 text-sm">{err}</div>}
       </form>
 
-      <ReceiptModal receipt={receipt} onClose={() => setReceipt(null)} />
+      <ReceiptModal
+        receipt={receipt}
+        onClose={() => setReceipt(null)}
+        name={name}
+        email={email}
+      />
     </div>
   );
 }

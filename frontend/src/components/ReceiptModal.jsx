@@ -1,4 +1,4 @@
-export default function ReceiptModal({ receipt, onClose }) {
+export default function ReceiptModal({ receipt, onClose, name, email }) {
   if (!receipt) return null;
 
   return (
@@ -16,13 +16,21 @@ export default function ReceiptModal({ receipt, onClose }) {
         </h2>
 
         <p className="text-center text-gray-600 mt-1">
-          Here is your mock receipt.
+          Here is your receipt.
         </p>
 
         <div className="mt-5 bg-gray-50 rounded-xl p-4 space-y-2">
           <div className="text-sm">
             <span className="font-medium text-gray-700">Receipt ID:</span>{" "}
             <span className="text-gray-800">{receipt.receiptId}</span>
+          </div>
+          <div className="text-sm">
+            <span className="font-medium text-gray-700">Your Name:</span>{" "}
+            <span className="text-gray-800">{name}</span>
+          </div>
+          <div className="text-sm">
+            <span className="font-medium text-gray-700">Email ID:</span>{" "}
+            <span className="text-gray-800">{email}</span>
           </div>
           <div className="text-sm">
             <span className="font-medium text-gray-700">Total Paid:</span>{" "}

@@ -12,6 +12,11 @@ A full-stack MERN project where users can browse products and manage their cart 
 ✔ Backend APIs with MongoDB  
 ✔ Fully responsive UI
 
+## Demo Video
+ https://youtu.be/r3jCzTC__Mc
+
+---
+
 ## Screenshot -----
 ## Home Page
 ![Home Page](./Screenshot/Home.png)
