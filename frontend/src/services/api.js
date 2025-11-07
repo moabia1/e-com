@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "http://localhost:4000/api",
+  baseURL: "https://e-com-w3i4.onrender.com/api",
 });
 
 export async function fetchProducts() {

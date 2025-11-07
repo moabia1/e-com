@@ -8,7 +8,9 @@ const errorHandler = require("./utils/erroHandler");
 const app = express();
 
 // Middlewares
-app.use(cors());
+app.use(
+  cors()
+);
 app.use(express.json());
 
 // DB connect
