@@ -21,33 +21,51 @@ export default function CartPage() {
     refresh();
   }, []);
 
-  const inc = async (item) => {
-    // Optimistic UI
+const inc = async (item) => {
+  const exists = cart.items.find((i) => i._id === item._id);
+
+  if (exists) {
     setCart((prev) => {
       const items = prev.items.map((i) =>
-        i.productId === item.productId
+        i._id === item._id
           ? { ...i, qty: i.qty + 1, lineTotal: (i.qty + 1) * i.price }
           : i
       );
       const total = items.reduce((s, x) => s + x.lineTotal, 0);
       return { items, total };
     });
-
-    await addToCart({
-      productId: item.productId,
-      name: item.name,
-      price: item.price,
-      qty: 1,
+  } else {
+    setCart((prev) => {
+      const newItem = {
+        _id: item._id,
+        productId: item.productId,
+        name: item.name,
+        price: item.price,
+        qty: 1,
+        lineTotal: item.price,
+      };
+      const items = [...prev.items, newItem];
+      const total = items.reduce((s, x) => s + x.lineTotal, 0);
+      return { items, total };
     });
-  };
+  }
+
+  await addToCart({
+    productId: item.productId,
+    name: item.name,
+    price: item.price,
+    qty: 1,
+  });
+};
+
+
 
   const dec = async (item) => {
     if (item.qty <= 1) return;
 
-    // Optimistic UI
     setCart((prev) => {
       const items = prev.items.map((i) =>
-        i.productId === item.productId
+        i._id === item._id
           ? { ...i, qty: i.qty - 1, lineTotal: (i.qty - 1) * i.price }
           : i
       );
@@ -55,25 +73,26 @@ export default function CartPage() {
       return { items, total };
     });
 
-    await removeItem(item._id || item.id);
     await addToCart({
       productId: item.productId,
       name: item.name,
       price: item.price,
-      qty: item.qty - 1,
+      qty: -1,
     });
   };
 
+
+
   const remove = async (id) => {
-    // Optimistic UI
     setCart((prev) => {
-      const items = prev.items.filter((i) => (i._id || i.id) !== id);
+      const items = prev.items.filter((i) => i._id !== id);
       const total = items.reduce((s, x) => s + x.lineTotal, 0);
       return { items, total };
     });
 
     await removeItem(id);
   };
+
 
   if (loading) {
     return (
@@ -108,7 +127,7 @@ export default function CartPage() {
             <div className="space-y-3">
               {cart.items.map((item) => (
                 <CartItemRow
-                  key={item._id || item.id}
+                  key={item._id}
                   item={item}
                   onIncrease={inc}
                   onDecrease={dec}
