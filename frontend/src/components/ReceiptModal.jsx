@@ -25,14 +25,6 @@ export default function ReceiptModal({ receipt, onClose, name, email }) {
             <span className="text-gray-800">{receipt.receiptId}</span>
           </div>
           <div className="text-sm">
-            <span className="font-medium text-gray-700">Your Name:</span>{" "}
-            <span className="text-gray-800">Md Moabia</span>
-          </div>
-          <div className="text-sm">
-            <span className="font-medium text-gray-700">Email ID:</span>{" "}
-            <span className="text-gray-800">mdmoabia81@gmail.com</span>
-          </div>
-          <div className="text-sm">
             <span className="font-medium text-gray-700">Total Paid:</span>{" "}
             <span className="font-semibold text-green-600">
               ₹{receipt.total}
